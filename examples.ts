@@ -261,3 +261,10 @@ const gameBoard: GameBoard = [
 ]
 
 gameBoard[0][1] = 'O'
+
+
+type RGB = readonly [number, number, number]
+
+const rgb: RGB = [255,255, 255]
+
+//❌ rgb.push(4)
