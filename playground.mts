@@ -1,0 +1,121 @@
+// File '.mts' so that it supports module syntax
+// Fetching of dates in typescript
+
+import { GitHubAPIResponse } from "./types/GitHubAPIResponse"
+
+const API_URL = 'https://api.github.com/search/repositories?q=javascript'
+
+const response = await fetch(API_URL)
+
+if (!response.ok) {
+    throw new Error('Request failed')
+}
+
+/* type APIResponse = {
+    items: object[]
+}
+ */
+const data: GitHubAPIResponse = await response.json() as GitHubAPIResponse
+
+
+const repos = data.items.map((repo) => {
+    console.log(repo)
+    repo.archived
+    return {
+        name: repo.name,
+        id: repo.id,
+        url: repo.html_url
+    }
+})
+//interface
+
+// interface Hero
+
+interface Hero {
+ id: string
+ name: string
+ age: number
+ greet: () => void
+}
+
+const hero: Hero = {
+    id: 'uuid',
+    name: 'Spiderman',
+    age: 330,
+    greet: () => {
+        console.log('Hello, I am Spiderman')
+    }
+}
+
+// nested interfaces 
+
+interface Product {
+    id: number
+    name: string
+    price: number
+    quantity: number
+}
+
+
+interface ShoppingCart {
+    totalPrice: number
+    products: Product[]
+}
+
+const cart: ShoppingCart = {
+    totalPrice: 100,
+    products: [
+        {
+            id: 1,
+            name: 'phone',
+            price: 50,
+            quantity: 1
+        },
+        {
+            id: 2,
+            name: 'headphones',
+            price: 25,
+            quantity: 2
+        }
+    ]
+}
+// interface extens
+interface Sneaker extends Product {
+    size : number
+}
+interface ShoppingCartTwo {
+    totalPrice: number
+    products: (Product| Sneaker)[]
+}
+const cartTwo: ShoppingCartTwo = {
+    totalPrice: 100,
+    products: [
+        {
+            id: 1,
+            name: 'sneakers',
+            price: 50,
+            quantity: 1,
+            size: 38
+        },
+        {
+            id: 2,
+            name: 'headphones',
+            price: 25,
+            quantity: 2
+        }
+    ]
+}
+
+// interface functions
+/* 
+interface CartOps {
+    add: (product: Product) => void
+    remove: (id: number) => void
+    clear: () => void
+} */
+
+interface CartOps {
+    add(product: Product): void
+    remove(id: number): void
+    clear(): void
+}
