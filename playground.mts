@@ -180,3 +180,17 @@ function play(character: Character){
         character.run()
     }
 }
+// never
+function fn (x:string | number){
+    if (typeof x === 'string') {
+        // do something
+        // x is string
+        x.toUpperCase()
+    }else if (typeof x === 'number') {
+        // do something
+        // x is number
+        x.toFixed(2)
+    } else {
+        x // never
+    }
+}
