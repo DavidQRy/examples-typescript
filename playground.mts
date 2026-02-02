@@ -119,3 +119,64 @@ interface CartOps {
     remove(id: number): void
     clear(): void
 }
+
+// Narrowing
+
+function getLength(object:number | string) {
+    if (typeof object === 'string') {
+        return object.length
+    }
+    return object.toString().length
+}
+
+getLength(1)
+
+/* interface Mario {
+    company: 'nintendo',
+    name: string,
+    jump: () => void
+}
+
+interface Sonic {
+    company: 'sega',
+    name: string,
+    run: () => void
+}
+
+type Character = Mario | Sonic
+
+function play(character: Character) {
+    if (character.company === 'nintendo') {
+        character.jump()
+        return
+    }
+    // I'll probably get here when it's Sony
+    character.run()
+} */
+interface Mario {
+    name: string,
+    jump: () => void
+}
+
+interface Sonic {
+    name: string,
+    run: () => void
+}
+
+type Character = Mario | Sonic
+
+// Type guard
+/*
+let me check if character is sonic
+and this function determines whether it is sonic or not 
+*/
+
+function checkIsSonic(character: Character): character is Sonic {
+    return (character as Sonic).run !== undefined
+}
+
+function play(character: Character){
+    if(checkIsSonic(character)){
+        character.run()
+    }
+}
