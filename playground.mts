@@ -194,3 +194,47 @@ function fn (x:string | number){
         x // never
     }
 }
+
+
+
+class Avenger implements IAvenger{
+    // readonly name: string
+    // private powerScore: number
+    // private readonly wonBattles: number = 0
+    // protected age: number = 0
+    name: string
+    powerScore: number
+    wonBattles: number = 0
+    age: number = 0
+
+    constructor(name: string, powerScore: number){
+        this.name = name
+        this.powerScore = powerScore
+    }
+
+    battle(enemy: IAvenger, win: boolean){
+        if (win) {
+            this.wonBattles++,
+            this.powerScore += 5
+        } else {
+            this.powerScore -= 5
+        }
+    }
+
+    
+    public get fullName() : string {
+        return `${this.name}, of power ${this.powerScore}`
+    }
+
+    set power (newPower: number){
+        if (newPower <= 100) {
+            this.powerScore = newPower
+        } else {
+            throw new Error('Power score cannot be more than 100')
+        }
+    }
+    
+}
+
+const avenger = new Avenger('Spidey', 80)
+// avenger.name = 'Hulk' // <-- this does not make sense
